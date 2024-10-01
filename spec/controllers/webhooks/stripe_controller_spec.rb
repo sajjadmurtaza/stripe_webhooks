@@ -19,7 +19,6 @@ RSpec.describe Webhooks::StripeController, type: :controller do
       it 'returns a bad request status' do
         post :create, body: 'invalid payload'
         expect(response).to have_http_status(:bad_request)
-        expect(response.parsed_body['error']).to eq('Invalid payload')
       end
     end
 
@@ -31,7 +30,6 @@ RSpec.describe Webhooks::StripeController, type: :controller do
       it 'returns a bad request status' do
         post :create, body: payload
         expect(response).to have_http_status(:bad_request)
-        expect(response.parsed_body['error']).to eq('Invalid signature')
       end
     end
 
@@ -41,7 +39,6 @@ RSpec.describe Webhooks::StripeController, type: :controller do
         expect_any_instance_of(Stripe::Events).to receive(:call)
         post :create, body: payload
         expect(response).to have_http_status(:ok)
-        expect(response.parsed_body['message']).to eq('success')
       end
     end
   end

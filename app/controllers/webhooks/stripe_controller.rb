@@ -11,16 +11,16 @@ module Webhooks
           payload, sig_header, ENV.fetch('STRIPE_WEBHOOK_SECRET', nil), tolerance: ENV.fetch('TOLERANCE', 500).to_i
         )
       rescue JSON::ParserError => e
-        render json: { error: 'Invalid payload' }, status: :bad_request
+        head :bad_request
         return
       rescue Stripe::SignatureVerificationError => e
-        render json: { error: 'Invalid signature' }, status: :bad_request
+        head :bad_request
         return
       end
 
       Stripe::Events.new(event:).call
 
-      render json: { message: 'success' }
+      head :ok
     end
   end
 end
