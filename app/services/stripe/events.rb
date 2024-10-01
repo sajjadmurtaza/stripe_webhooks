@@ -1,4 +1,3 @@
-# app/services/stripe/events.rb
 # frozen_string_literal: true
 
 module Stripe
