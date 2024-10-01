@@ -1,0 +1,14 @@
+{
+    "id": "evt_1Q55VNJGfIUfFif8ChKMn7GH",
+    "object": "event",
+    "api_version": "2020-03-02",
+    "created": 1727786921,
+    "data": {
+      "object": {
+        "id": "sub_1Q55VJJGfIUfFif8eVdbsW62",
+        "object": "subscription",
+        "status": "canceled"
+      }
+    },
+    "type": "customer.subscription.deleted"
+  }

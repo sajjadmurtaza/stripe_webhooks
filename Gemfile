@@ -34,7 +34,12 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
   gem 'rubocop-rails', require: false
   gem 'annotate'
+  gem 'dotenv-rails'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
   gem 'rspec-rails', '~> 7.0.1'
   gem 'factory_bot_rails'
-  gem 'dotenv-rails'
 end

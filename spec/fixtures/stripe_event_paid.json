@@ -1,0 +1,15 @@
+{
+    "id": "evt_1Q55VMJGfIUfFif8V4WKEb8Q",
+    "object": "event",
+    "api_version": "2020-03-02",
+    "created": 1727786919,
+    "data": {
+      "object": {
+        "id": "in_1Q55VJJGfIUfFif8d9lUqRJz",
+        "object": "invoice",
+        "status": "paid",
+        "subscription": "sub_1Q55VJJGfIUfFif8eVdbsW62"
+      }
+    },
+    "type": "invoice.paid"
+  }
