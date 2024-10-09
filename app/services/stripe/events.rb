@@ -29,6 +29,8 @@ module Stripe
     private
 
     def handle_subscription_created(subscription_data:)
+      return if ::Subscription.exists?(stripe_id: subscription_data.id)
+
       ::Subscription.create!(
         stripe_id: subscription_data.id,
         status: 'unpaid',
@@ -38,12 +40,22 @@ module Stripe
 
     def handle_invoice_payment_succeeded(subscription_data:)
       subscription = ::Subscription.find_by(stripe_id: subscription_data.subscription)
-      Subscriptions::Status.pay!(subscription: subscription, subscription_data: subscription_data) if subscription
+      return unless subscription
+
+      # Checking if the status is already 'paid'
+      return if subscription.paid?
+
+      Subscriptions::Status.pay!(subscription: subscription, subscription_data: subscription_data)
     end
 
     def handle_subscription_deleted(subscription_data:)
       subscription = ::Subscription.find_by(stripe_id: subscription_data.id)
-      Subscriptions::Status.cancel!(subscription: subscription, subscription_data: subscription_data) if subscription
+      return unless subscription
+
+      # Checking if the status is already 'canceled'
+      return if subscription.canceled?
+
+      Subscriptions::Status.cancel!(subscription: subscription, subscription_data: subscription_data)
     end
   end
 end

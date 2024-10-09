@@ -10,15 +10,12 @@ module Webhooks
         event = Stripe::Webhook.construct_event(
           payload, sig_header, ENV.fetch('STRIPE_WEBHOOK_SECRET', nil), tolerance: ENV.fetch('TOLERANCE', 500).to_i
         )
-      rescue JSON::ParserError => e
-        head :bad_request
-        return
-      rescue Stripe::SignatureVerificationError => e
+      rescue JSON::ParserError, Stripe::SignatureVerificationError
         head :bad_request
         return
       end
 
-      Stripe::Events.new(event:).call
+      StripeEventJob.perform_later(event: event.to_json)
 
       head :ok
     end

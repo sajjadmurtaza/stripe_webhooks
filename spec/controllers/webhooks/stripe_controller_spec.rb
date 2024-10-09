@@ -35,8 +35,7 @@ RSpec.describe Webhooks::StripeController, type: :controller do
 
     context 'when the event is valid' do
       it 'processes the event and returns success' do
-        expect(Stripe::Events).to receive(:new).with(event: event).and_call_original
-        expect_any_instance_of(Stripe::Events).to receive(:call)
+        expect(StripeEventJob).to receive(:perform_later).with(event: event.to_json)
         post :create, body: payload
         expect(response).to have_http_status(:ok)
       end
