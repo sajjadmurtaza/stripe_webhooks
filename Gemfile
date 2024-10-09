@@ -16,7 +16,7 @@ gem 'kamal', '>= 2.0.0.rc2', require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem 'thruster', require: false
 
-gem 'stripe', '~> 12.6.0'
+gem 'stripe', '~> 13.0.0'
 gem 'sidekiq', '~> 7.3.0'
 
 group :development, :test do
