@@ -5,7 +5,7 @@ gem 'sqlite3', '>= 2.1'
 gem 'puma', '>= 5.0'
 gem 'tzinfo-data', platforms: %i[ windows jruby ]
 
-gem 'pg', '~> 1.5.8'
+gem 'pg', '~> 1.5.9'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
